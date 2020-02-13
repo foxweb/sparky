@@ -20,9 +20,9 @@ Puma is configured to listen to UNIX-socket.
 
 ## Setup and deploy
 
-`mina setup` — installs ruby and bundles if needed.
-`mina deploy` — starts deployment from master to production host.
-`mina puma:start` — starts application server (`restart` and `stop` also available).
+- `mina setup` — installs ruby and bundles if needed.
+- `mina deploy` — starts deployment from master to production host.
+- `mina puma:start` — starts application server (`restart` and `stop` also available).
 
 ## Nginx config
 
