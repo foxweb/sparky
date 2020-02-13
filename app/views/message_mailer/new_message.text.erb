@@ -1,0 +1,5 @@
+Hi! New message received.
+
+<%- @message_data.each do |key, value| %>
+<%= "#{key.capitalize}: #{value}\n" %>
+<%- end %>

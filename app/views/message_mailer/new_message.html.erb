@@ -1,0 +1,7 @@
+<h1>Hi! New message received.</h1>
+
+<ul>
+  <%- @message_data.each do |key, value| %>
+  <%== "<li><strong>#{key.capitalize}:</strong> #{value}</li>" %>
+  <%- end %>
+</ul>
