@@ -10,9 +10,19 @@ Backend upstream is bound to the `/api` namespace. It has two routes:
 - `POST /api/messages` — receives message params and stores a record in PostgreSQL.
 - `GET  /api/check` — returns `Hello world!` string if the application works correctly.
 
+## Testing
+
+Testing is performed by `guard` or `rspec` and `rubocop`.
+
 ## Puma
 
 Puma is configured to listen to UNIX-socket.
+
+## Setup and deploy
+
+`mina setup` — installs ruby and bundles if needed.
+`mina deploy` — starts deployment from master to production host.
+`mina puma:start` — starts application server (`restart` and `stop` also available).
 
 ## Nginx config
 
