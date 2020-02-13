@@ -2,22 +2,21 @@
 
 ## Frontend
 
-Frontend files located in `/public` directory. Nginx exposes this content directly without requests to backend.
-
+Frontend files are located in the `/public` directory. Nginx exposes this content directly without requests to backend.
 
 ## Backend
 
-Backend upstream binded to `/api` namespace. It has two routes:
+Backend upstream is bound to the `/api` namespace. It has two routes:
 - `POST /api/messages` — receives message params and stores a record in PostgreSQL.
-- `GET  /api/check` — returns `Hello world!` string if application works correctly.
+- `GET  /api/check` — returns `Hello world!` string if the application works correctly.
 
 ## Puma
 
-Puma is configured for binding with UNIX-socket.
+Puma is configured to listen to UNIX-socket.
 
 ## Nginx config
 
-HTTP/2 and SSL enabled.
+HTTP/2 and SSL are enabled.
 
 ```
 upstream sparky {
@@ -25,13 +24,13 @@ upstream sparky {
 }
 
 server {
-        ssl_certificate /etc/letsencrypt/live/sparky.rediron.ru/fullchain.pem; # managed by Certbot
-        ssl_certificate_key /etc/letsencrypt/live/sparky.rediron.ru/privkey.pem; # managed by Certbot
+  ssl_certificate /etc/letsencrypt/live/sparky.rediron.ru/fullchain.pem; # managed by Certbot
+  ssl_certificate_key /etc/letsencrypt/live/sparky.rediron.ru/privkey.pem; # managed by Certbot
 
-        include snippets/ssl-params.conf;
+  include snippets/ssl-params.conf;
 
-        listen 443 ssl http2;
-        listen [::]:443 ssl http2;
+  listen 443 ssl http2;
+  listen [::]:443 ssl http2;
 
   server_name sparky.rediron.ru; # change to match your URL
   root /path/to/sparky/current/public; # I assume your app is located at that location
