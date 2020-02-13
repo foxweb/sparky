@@ -15,7 +15,6 @@ set :branch, 'master'
 # set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/secrets.yml')
 
 set :shared_dirs, fetch(:shared_dirs, []).push('tmp')
-set :shared_dirs, fetch(:shared_dirs, []).push('tmp/pids')
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
@@ -44,7 +43,7 @@ task :deploy do
 
     on :launch do
       in_path(fetch(:current_path)) do
-        command %{mkdir -p tmp/}
+        command %{mkdir -p tmp/pids}
         command %{touch tmp/restart.txt}
       end
     end
