@@ -1,24 +1,51 @@
-# README
+# Sparky is a demo Rails application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Frontend
 
-Things you may want to cover:
+Frontend files located in `/public` directory. Nginx exposes this content directly without requests to backend.
 
-* Ruby version
 
-* System dependencies
+## Backend
 
-* Configuration
+Backend upstream binded to `/api` namespace. It has two routes:
+- `POST /api/messages` — receives message params and stores a record in PostgreSQL.
+- `GET  /api/check` — returns `Hello world!` string if application works correctly.
 
-* Database creation
+## Puma
 
-* Database initialization
+Puma is configured for binding with UNIX-socket.
 
-* How to run the test suite
+## Nginx config
 
-* Services (job queues, cache servers, search engines, etc.)
+HTTP/2 and SSL enabled.
 
-* Deployment instructions
+```
+upstream sparky {
+  server unix:/path/to/sparky/shared/sockets/puma.sock;
+}
 
-* ...
+server {
+        ssl_certificate /etc/letsencrypt/live/sparky.rediron.ru/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/sparky.rediron.ru/privkey.pem; # managed by Certbot
+
+        include snippets/ssl-params.conf;
+
+        listen 443 ssl http2;
+        listen [::]:443 ssl http2;
+
+  server_name sparky.rediron.ru; # change to match your URL
+  root /path/to/sparky/current/public; # I assume your app is located at that location
+
+  error_log /var/log/nginx/sparky.rediron.ru-error.log;
+  access_log /var/log/nginx/sparky.rediron.ru-access.log;
+
+  location /api/ {
+    proxy_set_header X-Real-IP  $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_redirect off;
+
+    proxy_pass http://sparky/;
+  }
+}
+```
