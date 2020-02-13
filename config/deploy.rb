@@ -16,6 +16,7 @@ set :branch, 'master'
 
 set :shared_dirs, fetch(:shared_dirs, []).push('tmp')
 set :shared_dirs, fetch(:shared_dirs, []).push('log')
+set :shared_files, fetch(:shared_files, []).push('config/credentials/production.key')
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
