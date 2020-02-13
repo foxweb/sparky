@@ -47,3 +47,26 @@ task :deploy do
     end
   end
 end
+
+namespace :puma do
+  desc 'Restart puma'
+  task restart: :remote_environment do
+    command %{
+      cd #{fetch(:current_path)} && bundle exec pumactl -F ./config/puma/production.rb restart
+    }
+  end
+
+  desc 'Stop puma'
+  task stop: :remote_environment do
+    command %{
+      cd #{fetch(:current_path)} && bundle exec pumactl -S ./tmp/puma.state stop
+    }
+  end
+
+  desc 'Start puma'
+  task start: :remote_environment do
+    command %{
+      cd #{fetch(:current_path)} && bundle exec puma -C ./config/puma/production.rb
+    }
+  end
+end
