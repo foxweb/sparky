@@ -15,6 +15,5 @@ test:
 
 production:
   <<: *default
-  database: sparky_production
-  username: sparky
+  database: sparky
   password: <%= ENV['SPARKY_DATABASE_PASSWORD'] %>

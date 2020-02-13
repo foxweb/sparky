@@ -24,7 +24,8 @@ end
 # All paths in `shared_dirs` and `shared_paths` will be created on their own.
 task :setup do
   command %{rbenv install 2.6.5 --skip-existing}
-  invoke :'rails:db_create'
+  command %{gem install bundler}
+  # invoke :'rails:db_create'
 end
 
 desc "Deploys the current version to the server."
