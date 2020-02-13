@@ -6,6 +6,10 @@ class MessagesController < ApplicationController
     render json: message, status: :created
   end
 
+  def index
+    render json: Message.all
+  end
+
 private
   def message_params
     params.require(:message).permit(:name, :email, :phone, :body)

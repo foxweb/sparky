@@ -6,7 +6,8 @@ Frontend files are located in the `/public` directory. Nginx exposes this conten
 
 ## Backend
 
-Backend upstream is bound to the `/api` namespace. It has two routes:
+Backend upstream is bound to the `/api` namespace. It has few routes:
+- `GET  /api/messages` — lists all stored messages in JSON format.
 - `POST /api/messages` — receives message params and stores a record in PostgreSQL.
 - `GET  /api/check` — returns `Hello world!` string if the application works correctly.
 
