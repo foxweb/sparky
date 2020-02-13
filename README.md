@@ -43,8 +43,8 @@ server {
   listen 443 ssl http2;
   listen [::]:443 ssl http2;
 
-  server_name sparky.rediron.ru; # change to match your URL
-  root /path/to/sparky/current/public; # I assume your app is located at that location
+  server_name sparky.rediron.ru;
+  root /path/to/sparky/current/public;
 
   error_log /var/log/nginx/sparky.rediron.ru-error.log;
   access_log /var/log/nginx/sparky.rediron.ru-access.log;
